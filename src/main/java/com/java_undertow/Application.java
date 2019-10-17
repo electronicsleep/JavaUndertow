@@ -11,25 +11,27 @@ public class Application {
 
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Undertow.Builder builder = Undertow.builder();
 		builder.setIoThreads(2);
 		builder.setWorkerThreads(10);
-        String host = "0.0.0.0";
-        int port = 8080;
+		String host = "0.0.0.0";
+		int port = 8080;
 		builder.addHttpListener(port, host);
+		System.out.println("Server started: http://" + host + ":" + port);
 		builder.setHandler(path()
-			.addPrefixPath("/", exchange -> {
-                exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
-				exchange.getResponseSender().send("Root endpoint");
-                logger.info("Root endpoint");
-			})
-		);
-		builder.setHandler(path()
-				.addPrefixPath("/api", exchange -> {
-					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
+				.addPrefixPath("/", exchange -> {
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+					exchange.getResponseSender().send("Root endpoint");
+					logger.info("Root endpoint");
+	            }).addPrefixPath("/api", exchange -> {
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
 					exchange.getResponseSender().send("API endpoint");
 					logger.info("API endpoint");
+				}).addPrefixPath("/health", exchange -> {
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+					exchange.getResponseSender().send("Health endpoint");
+					logger.info("Health endpoint");
 				})
 		);
 		Undertow server = builder.build();
