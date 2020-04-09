@@ -20,18 +20,18 @@ public class Application {
 		builder.addHttpListener(port, host);
 		System.out.println("Server started: http://" + host + ":" + port);
 		builder.setHandler(path()
-				.addPrefixPath("/", exchange -> {
+				.addPrefixPath("/test", exchange -> {
+					logger.info("test endpoint");
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-					exchange.getResponseSender().send("Root endpoint");
-					logger.info("Root endpoint");
+					exchange.getResponseSender().send("test endpoint");
 	            }).addPrefixPath("/api", exchange -> {
-					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-					exchange.getResponseSender().send("API endpoint");
 					logger.info("API endpoint");
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
+					exchange.getResponseSender().send("{\"status\": \"up\"}");
 				}).addPrefixPath("/health", exchange -> {
-					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-					exchange.getResponseSender().send("Health endpoint");
 					logger.info("Health endpoint");
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+					exchange.getResponseSender().send("{\"status\": \"up\"}");
 				})
 		);
 		Undertow server = builder.build();
