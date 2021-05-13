@@ -26,8 +26,6 @@ public class Application {
 					exchange.getResponseSender().send("root endpoint");
 	            }).addPrefixPath("/api", exchange -> {
 					logger.info("API endpoint");
-					ScoreApi scoreApi = new ScoreApi();
-					scoreApi.test();
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
 					exchange.getResponseSender().send("{\"api\": \"Up\"}");
 				}).addPrefixPath("/health", exchange -> {
