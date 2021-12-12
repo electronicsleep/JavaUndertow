@@ -26,8 +26,8 @@ repositories {
     maven { url 'https://oss.jfrog.org/oss-snapshot-local' }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 configurations {
     integrationTestCompile.extendsFrom testCompile
@@ -38,7 +38,7 @@ sourceSets {
 }
 
 def jacksonVersion='2.9.+'
-def log4jVersion='2.12.+'
+def log4jVersion='2.15.+'
 
 mainClassName = "com.java_undertow.Application"
 
@@ -49,7 +49,8 @@ shadowJar {
 }
 
 dependencies {
-    compile "io.undertow:undertow-core:2.0.26.Final"
+    //compile "io.undertow:undertow-core:2.0.26.Final"
+    compile "io.undertow:undertow-core:2.2.12.Final"
 
     compile "javax.inject:javax.inject:1"
     compile "commons-io:commons-io:2.6"
