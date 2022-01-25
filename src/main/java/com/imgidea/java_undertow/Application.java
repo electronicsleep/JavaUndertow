@@ -1,5 +1,7 @@
 package com.imgidea.java_undertow;
 
+import com.imgidea.java_undertow.service.StatusPage;
+
 import io.undertow.Undertow;
 import static io.undertow.Handlers.path;
 import io.undertow.util.Headers;
@@ -36,6 +38,12 @@ public class Application {
 					logger.info("API endpoint");
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
 					exchange.getResponseSender().send("{\"api\": \"Up\"}");
+				}).addPrefixPath("/status", exchange -> {
+					logger.info("Status endpoint");
+					StatusPage statusPage = new StatusPage();
+					String content = statusPage.Monitor();
+					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+					exchange.getResponseSender().send(html_header + content + html_footer);
 				}).addPrefixPath("/health", exchange -> {
 					logger.info("Health endpoint");
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");

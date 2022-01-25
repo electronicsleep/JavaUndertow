@@ -1,5 +1,7 @@
 # JavaUndertow
 
+Example microservice in Java and Undertow
+
 ```
 gradle clean build
 

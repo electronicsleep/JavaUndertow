@@ -49,7 +49,6 @@ shadowJar {
 }
 
 dependencies {
-    //compile "io.undertow:undertow-core:2.0.26.Final"
     compile "io.undertow:undertow-core:2.2.12.Final"
 
     compile "javax.inject:javax.inject:1"
