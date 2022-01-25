@@ -3,7 +3,7 @@
 	<Properties>
 		<Property name="log4j2.contextSelector">org.apache.logging.log4j.core.async.AsyncLoggerContextSelector</Property>
 	</Properties>
-	<Filter type="ThresholdFilter" level="info"/>
+	<Filter type="ThresholdFilter" level="debug"/>
 	<Appenders>
 		<Console name="console" target="SYSTEM_OUT">
 			<JsonLayout compact="true" complete="false" properties="true" eventEol="true" />
@@ -33,7 +33,8 @@
 		<AsyncLogger name="io" level="info" additivity="false" includeLocation="true">
 			<appender-ref ref="async"/>
 		</AsyncLogger>
-		<AsyncRoot level="info" additivity="false" includeLocation="true">
+		<!-- change log level below: set level="info" or level="debug" -->
+		<AsyncRoot level="debug" additivity="false" includeLocation="true">
 			<AppenderRef ref="async"/>
 		</AsyncRoot>
 	</Loggers>

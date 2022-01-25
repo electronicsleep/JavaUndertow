@@ -7,23 +7,33 @@ import io.undertow.util.Headers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.java_undertow.service.StatusPage;
+
 public class Application {
 
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
+	final static String html_header = "<!DOCTYPE html>\n<html lang=\"en\">\n<body><a href=\"/\">home</a> <a href=\"/status\">status</a><br>\n";
+	final static String html_footer = "</body>\n</html>";
+
+	final static int IoThreads = 5;
+	final static int WorkerThreads = 10;
+
+	final static String host = "0.0.0.0";
+	final static int port = 8080;
+
 	public static void main(String[] args) {
 		Undertow.Builder builder = Undertow.builder();
-		builder.setIoThreads(5);
-		builder.setWorkerThreads(10);
-		String host = "0.0.0.0";
-		int port = 8080;
+		builder.setIoThreads(IoThreads);
+		builder.setWorkerThreads(WorkerThreads);
 		builder.addHttpListener(port, host);
-		System.out.println("Server started: http://" + host + ":" + port);
+		System.out.println("Server: http://" + host + ":" + port);
 		builder.setHandler(path()
 				.addPrefixPath("/", exchange -> {
 					logger.info("Root endpoint");
+					logger.info("Debug Root endpoint");
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-					exchange.getResponseSender().send("root endpoint");
+					exchange.getResponseSender().send(html_header + "JavaUndertow" + html_footer);
 	            }).addPrefixPath("/api", exchange -> {
 					logger.info("API endpoint");
 					exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
