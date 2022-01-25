@@ -1,0 +1,9 @@
+----- Service1
+Ok:
+----- Service2
+Ok:
+----- Test
+Error: test error
+----- TestWarn
+Warn: test warn
+-----
