@@ -1,4 +1,4 @@
-package com.java_undertow;
+package com.imgidea.java_undertow;
 
 import io.undertow.Undertow;
 import static io.undertow.Handlers.path;
@@ -6,8 +6,6 @@ import io.undertow.util.Headers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.java_undertow.service.StatusPage;
 
 public class Application {
 

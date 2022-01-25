@@ -34,7 +34,7 @@
 			<appender-ref ref="async"/>
 		</AsyncLogger>
 		<!-- change log level below: set level="info" or level="debug" -->
-		<AsyncRoot level="debug" additivity="false" includeLocation="true">
+		<AsyncRoot level="info" additivity="false" includeLocation="true">
 			<AppenderRef ref="async"/>
 		</AsyncRoot>
 	</Loggers>

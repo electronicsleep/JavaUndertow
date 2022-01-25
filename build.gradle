@@ -40,7 +40,7 @@ sourceSets {
 def jacksonVersion='2.9.+'
 def log4jVersion='2.17.+'
 
-mainClassName = "com.java_undertow.Application"
+mainClassName = "com.imgidea.java_undertow.Application"
 
 shadowJar {
     classifier = null
