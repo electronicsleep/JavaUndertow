@@ -1,14 +1,23 @@
 package com.imgidea.java_undertow.service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
+import io.undertow.server.HttpHandler;
+import io.undertow.server.HttpServerExchange;
+import io.undertow.util.Headers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-public class StatusPage {
+public class StatusPageHandler implements HttpHandler {
+
+    final static String html_header = "<!DOCTYPE html>\n<html lang=\"en\">\n<body>" +
+            "<a href=\"/\">Home</a> <a href=\"/status\">Status</a><br>\n";
+    final static String html_footer = "</body>\n</html>";
 
     private static final Logger logger = LogManager.getLogger("java_undertow");
 
@@ -17,7 +26,16 @@ public class StatusPage {
     final static String ColorRed = "#FF0000";
     final static String Section = "-----";
 
-    public String Monitor() {
+    private final String value;
+
+    public StatusPageHandler(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public void handleRequest(HttpServerExchange exchange) {
+        logger.info("Endpoint: StatusPageHandler");
+
         String SectionName = "Start";
         String charts = "\n<table>";
         String CurrentLine = "";
@@ -67,21 +85,21 @@ public class StatusPage {
                     if (CurrentLine.indexOf("Warn:") >= 0) {
                         WarnFound = true;
                         IssueReason = "<br>" + CurrentLine;
-                        logger.info("Monitor Warn Found: " + CurrentLine);
+                        logger.debug("Monitor Warn Found: " + CurrentLine);
                     }
                     if (CurrentLine.indexOf("Error:") >= 0) {
                         ErrorFound = true;
                         IssueReason = "<br>" + CurrentLine;
-                        logger.info("Monitor Error Found: " + CurrentLine);
+                        logger.debug("Monitor Error Found: " + CurrentLine);
                     }
                 }
             }
             br.close();
             charts += "\n</table>\n";
-            logger.info("status endpoint");
+            exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
+            exchange.getResponseSender().send(html_header + charts + html_footer);
         } catch(IOException e) {
             e.printStackTrace();
         }
-        return charts;
     }
 }
