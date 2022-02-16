@@ -18,6 +18,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		System.out.println("Server: http://" + host + ":" + port);
+		logger.info("Server Started");
 
 		Undertow.Builder builder = Undertow.builder();
 		builder.setIoThreads(IoThreads);

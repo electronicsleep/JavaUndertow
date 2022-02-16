@@ -11,18 +11,18 @@ import static com.imgidea.java_undertow.Constants.*;
 
 public class HtmlPageHandler implements HttpHandler {
 
-    private final String value;
+    private final String content;
 
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
-    public HtmlPageHandler(String value) {
-        this.value = value;
+    public HtmlPageHandler(String content) {
+        this.content = content;
     }
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        logger.info("Endpoint: " + value);
+        logger.info("Endpoint: " + content);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-        exchange.getResponseSender().send(HTML_HEADER + value + HTML_FOOTER);
+        exchange.getResponseSender().send(HTML_HEADER + content + HTML_FOOTER);
     }
 }
