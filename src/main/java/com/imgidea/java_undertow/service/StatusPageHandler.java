@@ -3,6 +3,7 @@ package com.imgidea.java_undertow.service;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,11 +14,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class StatusPageHandler implements HttpHandler {
+import static com.imgidea.java_undertow.Constants.*;
 
-    final static String html_header = "<!DOCTYPE html>\n<html lang=\"en\">\n<body>" +
-            "<a href=\"/\">Home</a> <a href=\"/status\">Status</a><br>\n";
-    final static String html_footer = "</body>\n</html>";
+public class StatusPageHandler implements HttpHandler {
 
     private static final Logger logger = LogManager.getLogger("java_undertow");
 
@@ -97,7 +96,7 @@ public class StatusPageHandler implements HttpHandler {
             br.close();
             charts += "\n</table>\n";
             exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-            exchange.getResponseSender().send(html_header + charts + html_footer);
+            exchange.getResponseSender().send(HTML_HEADER + charts + HTML_FOOTER);
         } catch(IOException e) {
             e.printStackTrace();
         }
