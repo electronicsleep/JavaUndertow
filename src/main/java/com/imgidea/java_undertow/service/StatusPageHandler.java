@@ -25,10 +25,10 @@ public class StatusPageHandler implements HttpHandler {
     final static String ColorRed = "#FF0000";
     final static String Section = "-----";
 
-    private final String value;
+    private final String content;
 
-    public StatusPageHandler(String value) {
-        this.value = value;
+    public StatusPageHandler(String content) {
+        this.content = content;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class StatusPageHandler implements HttpHandler {
         logger.info("Endpoint: StatusPageHandler");
 
         String SectionName = "Start";
-        String charts = "\n<table>";
+        String charts = "<table>";
         String CurrentLine = "";
         String Color = "";
 
@@ -94,7 +94,7 @@ public class StatusPageHandler implements HttpHandler {
                 }
             }
             br.close();
-            charts += "\n</table>\n";
+            charts += "\n</table>";
             exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
             exchange.getResponseSender().send(HTML_HEADER + charts + HTML_FOOTER);
         } catch(IOException e) {
