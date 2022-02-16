@@ -1,15 +1,18 @@
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://oss.jfrog.org/oss-snapshot-local' }
 
     }
 
     dependencies {
+        //Gradle 7
+        //classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
+        //Gradle 6
         classpath "com.github.jengelman.gradle.plugins:shadow:4.0.4"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.20.0"
+
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.41.0"
     }
 }
 
@@ -26,8 +29,11 @@ repositories {
     maven { url 'https://oss.jfrog.org/oss-snapshot-local' }
 }
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
+}
 
 configurations {
     integrationTestCompile.extendsFrom testCompile
@@ -43,27 +49,28 @@ def log4jVersion='2.17.+'
 mainClassName = "com.imgidea.java_undertow.Application"
 
 shadowJar {
-    classifier = null
-    version = null
+    //archiveBaseName = 'java_undertow'
+    archiveClassifier = ''
+    archiveVersion = ''
     mergeServiceFiles()
 }
 
 dependencies {
-    compile "io.undertow:undertow-core:2.2.12.Final"
+    implementation "io.undertow:undertow-core:2.2.12.Final"
 
-    compile "javax.inject:javax.inject:1"
-    compile "commons-io:commons-io:2.6"
-    compile "org.apache.commons:commons-lang3:3.+"
-    compile "org.apache.commons:commons-collections4:4.3"
+    implementation "javax.inject:javax.inject:1"
+    implementation "commons-io:commons-io:2.6"
+    implementation "org.apache.commons:commons-lang3:3.+"
+    implementation "org.apache.commons:commons-collections4:4.3"
 
     //json parsing
-    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
-    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    implementation"com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
 
-    compile "com.lmax:disruptor:3.4.2"
-    compile "org.apache.logging.log4j:log4j-api:${log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-core:${log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
-    compile "org.apache.logging.log4j:log4j-jcl:${log4jVersion}"
+    implementation "com.lmax:disruptor:3.4.2"
+    implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-jcl:${log4jVersion}"
 }
