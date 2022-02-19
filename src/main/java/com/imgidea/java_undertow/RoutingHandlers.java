@@ -18,7 +18,12 @@ public class RoutingHandlers {
         return new HtmlPageHandler(value);
     }
 
-    public static HttpHandler statusPageHandler(String value) {
+    public static HttpHandler JsonPageHandler(String value) {
+        logger.info("jsonPageHandler");
+        return new JsonPageHandler(value);
+    }
+
+    public static HttpHandler StatusPageHandler(String value) {
         logger.info("StatusPageHandler");
         return new StatusPageHandler(value);
     }

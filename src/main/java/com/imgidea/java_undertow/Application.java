@@ -7,6 +7,8 @@ import io.undertow.server.RoutingHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.imgidea.java_undertow.Constants.*;
+
 public class Application {
 
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
@@ -30,11 +32,11 @@ public class Application {
 	}
 
 	private static HttpHandler ROUTES = new RoutingHandler()
-		.get("/", RoutingHandlers.HtmlPageHandler("Java Undertow"))
+		.get("/", RoutingHandlers.HtmlPageHandler("Java"))
 		.get("/about", RoutingHandlers.HtmlPageHandler("About"))
-		.get("/status", RoutingHandlers.statusPageHandler("Status"))
-		.get("/health", RoutingHandlers.HtmlPageHandler("Health Ok"))
+		.get("/status", RoutingHandlers.StatusPageHandler("Status"))
+		.get("/health", RoutingHandlers.JsonPageHandler(HEALTH_OK))
 		.post("/about", RoutingHandlers.HtmlPageHandler("About/POST"))
-		.get("/new*", RoutingHandlers.HtmlPageHandler("new*"))
+		.get("/page", RoutingHandlers.HtmlPageHandler("Page*"))
 		.setFallbackHandler(RoutingHandlers::notFoundHandler);
 }
