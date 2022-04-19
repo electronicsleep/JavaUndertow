@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 public class JsonPageHandler implements HttpHandler {
 
     private final String content;
-
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
     public JsonPageHandler(String content) {
@@ -19,7 +18,7 @@ public class JsonPageHandler implements HttpHandler {
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        logger.info("Endpoint: " + content);
+        logger.info("Endpoint: Json: " + content);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
         exchange.getResponseSender().send(content);
     }

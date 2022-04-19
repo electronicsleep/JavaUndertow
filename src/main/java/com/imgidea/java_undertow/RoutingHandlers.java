@@ -4,9 +4,6 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.imgidea.java_undertow.service.StatusPageHandler;
 import com.imgidea.java_undertow.service.TopScoreHandler;
 

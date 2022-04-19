@@ -36,8 +36,8 @@ public class Application {
 		.get("/about", RoutingHandlers.HtmlPageHandler(ABOUT))
 		.get("/status", RoutingHandlers.StatusPageHandler("Status"))
 		.get("/health", RoutingHandlers.JsonPageHandler(HEALTH_OK))
-		.get("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("test"))
-		.post("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("test"))
+		.get("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("GET score"))
+		.post("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("POST score"))
 		.post("/about", RoutingHandlers.HtmlPageHandler("About/POST"))
 		.get("/page*", RoutingHandlers.HtmlPageHandler("Page*"))
 		.setFallbackHandler(RoutingHandlers::notFoundHandler);

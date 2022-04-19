@@ -12,7 +12,6 @@ import static com.imgidea.java_undertow.Constants.*;
 public class HtmlPageHandler implements HttpHandler {
 
     private final String content;
-
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
     public HtmlPageHandler(String content) {
@@ -21,7 +20,7 @@ public class HtmlPageHandler implements HttpHandler {
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        logger.info("Endpoint: " + content);
+        logger.info("Endpoint: Html: " + content);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
         exchange.getResponseSender().send(HTML_HEADER + content + HTML_FOOTER);
     }

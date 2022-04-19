@@ -2,10 +2,10 @@
 
 Example microservice in Java and Undertow
 
+Run
 ```
-gradle clean build
-
-java -jar build/libs/JavaUndertow.jar
+bash run.sh
+bash src/main/test/test.sh
 ```
 
 http://undertow.io

@@ -33,7 +33,7 @@ public class StatusPageHandler implements HttpHandler {
 
     @Override
     public void handleRequest(HttpServerExchange exchange) {
-        logger.info("Endpoint: StatusPageHandler");
+        logger.info("Endpoint: StatusPageHandler Content: " + content);
 
         String SectionName = "Start";
         String charts = "<table>";

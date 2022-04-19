@@ -12,7 +12,6 @@ import java.util.Map;
 public class TopScoreHandler implements HttpHandler {
 
     private final String content;
-
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
     public TopScoreHandler(String content) {
@@ -24,7 +23,7 @@ public class TopScoreHandler implements HttpHandler {
         Map<String, Deque<String>> params = exchange.getQueryParameters();
         String name = params.get("name").getFirst();
         String score = params.get("score").getFirst();
-        logger.info("TopScoreHandler Name: " + name + " Score:" + score);
+        logger.info("TopScoreHandler Name: " + name + " Score:" + score + " Content: " + content);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "application/json");
         exchange.getResponseSender().send("{\""+name+"\": \""+score+"\"}");
     }

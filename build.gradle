@@ -49,7 +49,6 @@ def log4jVersion='2.17.+'
 mainClassName = "com.imgidea.java_undertow.Application"
 
 shadowJar {
-    //archiveBaseName = 'java_undertow'
     archiveClassifier = ''
     archiveVersion = ''
     mergeServiceFiles()
