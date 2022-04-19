@@ -25,18 +25,19 @@ public class Application {
 		builder.setWorkerThreads(WorkerThreads);
 
 		Undertow server = Undertow.builder()
-				.addHttpListener(8080, "localhost", ROUTES)
+				.addHttpListener(port, host, ROUTES)
 				.build();
 		server.start();
 		logger.info("Server Started");
 	}
 
 	private static HttpHandler ROUTES = new RoutingHandler()
-		.get("/", RoutingHandlers.HtmlPageHandler("Java"))
-		.get("/about", RoutingHandlers.HtmlPageHandler("About"))
+		.get("/", RoutingHandlers.HtmlPageHandler("JavaUndertow"))
+		.get("/about", RoutingHandlers.HtmlPageHandler(ABOUT))
 		.get("/status", RoutingHandlers.StatusPageHandler("Status"))
 		.get("/health", RoutingHandlers.JsonPageHandler(HEALTH_OK))
+		.get("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("test"))
 		.post("/about", RoutingHandlers.HtmlPageHandler("About/POST"))
-		.get("/page", RoutingHandlers.HtmlPageHandler("Page*"))
+		.get("/page*", RoutingHandlers.HtmlPageHandler("Page*"))
 		.setFallbackHandler(RoutingHandlers::notFoundHandler);
 }

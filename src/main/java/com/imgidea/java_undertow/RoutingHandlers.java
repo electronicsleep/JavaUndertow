@@ -8,28 +8,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.imgidea.java_undertow.service.StatusPageHandler;
+import com.imgidea.java_undertow.service.TopScoreHandler;
 
 public class RoutingHandlers {
 
-    private static final Logger logger = LogManager.getLogger("JavaUndertow");
-
     public static HttpHandler HtmlPageHandler(String value) {
-        logger.info("htmlPageHandler");
         return new HtmlPageHandler(value);
     }
-
     public static HttpHandler JsonPageHandler(String value) {
-        logger.info("jsonPageHandler");
         return new JsonPageHandler(value);
     }
 
     public static HttpHandler StatusPageHandler(String value) {
-        logger.info("StatusPageHandler");
         return new StatusPageHandler(value);
     }
 
+    public static HttpHandler TopScoreHandler(String value) {
+        return new TopScoreHandler(value);
+    }
+
     public static void notFoundHandler(HttpServerExchange exchange) {
-        logger.info("notFoundHandler");
         exchange.setStatusCode(404);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
         exchange.getResponseSender().send("Page Not Found");

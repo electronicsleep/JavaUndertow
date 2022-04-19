@@ -5,4 +5,5 @@ public final class Constants {
             "<a href=\"/\">Home</a> <a href=\"/status\">Status</a><br>\n";
     public static final String HTML_FOOTER = "\n</body>\n</html>\n";
     public static final String HEALTH_OK = "{\"health\": \"ok\"}";
+    public static final String ABOUT = "JavaUndertow is a example microservice written for simplicity and speed";
 }
