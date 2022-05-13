@@ -16,7 +16,7 @@ import java.net.URL;
 
 import static com.imgidea.java_undertow.Constants.*;
 
-public class StatusPageHandler implements HttpHandler {
+public class StatusPage implements HttpHandler {
 
     private static final Logger logger = LogManager.getLogger("java_undertow");
 
@@ -27,7 +27,7 @@ public class StatusPageHandler implements HttpHandler {
 
     private final String content;
 
-    public StatusPageHandler(String content) {
+    public StatusPage(String content) {
         this.content = content;
     }
 
@@ -96,7 +96,7 @@ public class StatusPageHandler implements HttpHandler {
             br.close();
             charts += "\n</table>";
             exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-            exchange.getResponseSender().send(HTML_HEADER + charts + HTML_FOOTER);
+            exchange.getResponseSender().send(HTML_HEADER + HEADER_LINKS + charts + HTML_FOOTER);
         } catch(IOException e) {
             e.printStackTrace();
         }

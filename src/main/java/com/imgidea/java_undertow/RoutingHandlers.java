@@ -4,8 +4,9 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.Headers;
 
-import com.imgidea.java_undertow.service.StatusPageHandler;
-import com.imgidea.java_undertow.service.TopScoreHandler;
+import com.imgidea.java_undertow.service.StatusPage;
+import com.imgidea.java_undertow.service.TopScores;
+//import com.imgidea.java_undertow.service.EventsService;
 
 public class RoutingHandlers {
 
@@ -17,12 +18,18 @@ public class RoutingHandlers {
     }
 
     public static HttpHandler StatusPageHandler(String value) {
-        return new StatusPageHandler(value);
+        return new StatusPage(value);
     }
 
     public static HttpHandler TopScoreHandler(String value) {
-        return new TopScoreHandler(value);
+        return new TopScores(value);
     }
+
+    /*
+    public static HttpHandler EventsHandler(String value) {
+        return new EventsService(value);
+    }
+    */
 
     public static void notFoundHandler(HttpServerExchange exchange) {
         exchange.setStatusCode(404);

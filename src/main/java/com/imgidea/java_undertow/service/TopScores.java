@@ -9,12 +9,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.Deque;
 import java.util.Map;
 
-public class TopScoreHandler implements HttpHandler {
+public class TopScores implements HttpHandler {
 
     private final String content;
     private static final Logger logger = LogManager.getLogger("JavaUndertow");
 
-    public TopScoreHandler(String content) {
+    public TopScores(String content) {
         this.content = content;
     }
 

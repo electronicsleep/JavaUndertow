@@ -22,6 +22,6 @@ public class HtmlPageHandler implements HttpHandler {
     public void handleRequest(HttpServerExchange exchange) {
         logger.info("Endpoint: Html: " + content);
         exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/html");
-        exchange.getResponseSender().send(HTML_HEADER + content + HTML_FOOTER);
+        exchange.getResponseSender().send(HTML_HEADER + HEADER_LINKS + content + HTML_FOOTER);
     }
 }
