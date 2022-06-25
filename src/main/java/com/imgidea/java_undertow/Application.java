@@ -32,14 +32,14 @@ public class Application {
 	}
 
 	private static HttpHandler ROUTES = new RoutingHandler()
-		.get("/", RoutingHandlers.HtmlPageHandler("JavaUndertow"))
+		.get("/", RoutingHandlers.HtmlPageHandler("JavaUndertow: Home"))
+		.get("/health", RoutingHandlers.JsonPageHandler(HEALTH_OK))
 		.get("/about", RoutingHandlers.HtmlPageHandler(ABOUT))
 		.get("/status", RoutingHandlers.StatusPageHandler("Status"))
-		.get("/health", RoutingHandlers.JsonPageHandler(HEALTH_OK))
-		//.get("/events", RoutingHandlers.EventsHandler(HEALTH_OK))
+		.get("/events", RoutingHandlers.EventsHandler("Events"))
 		.get("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("GET score"))
 		.post("/add_score/{name}/{score}", RoutingHandlers.TopScoreHandler("POST score"))
-		.post("/about", RoutingHandlers.HtmlPageHandler("About/POST"))
+		.post("/add/{service}/{event}/{event_type}", RoutingHandlers.AddEventHandler("Add Event"))
 		.get("/page*", RoutingHandlers.HtmlPageHandler("Page*"))
 		.setFallbackHandler(RoutingHandlers::notFoundHandler);
 }

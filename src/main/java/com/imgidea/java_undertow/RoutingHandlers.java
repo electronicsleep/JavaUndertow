@@ -6,7 +6,8 @@ import io.undertow.util.Headers;
 
 import com.imgidea.java_undertow.service.StatusPage;
 import com.imgidea.java_undertow.service.TopScores;
-//import com.imgidea.java_undertow.service.EventsService;
+import com.imgidea.java_undertow.service.EventsService;
+import com.imgidea.java_undertow.service.AddEventService;
 
 public class RoutingHandlers {
 
@@ -25,11 +26,13 @@ public class RoutingHandlers {
         return new TopScores(value);
     }
 
-    /*
     public static HttpHandler EventsHandler(String value) {
         return new EventsService(value);
     }
-    */
+
+    public static HttpHandler AddEventHandler(String value) {
+        return new AddEventService(value);
+    }
 
     public static void notFoundHandler(HttpServerExchange exchange) {
         exchange.setStatusCode(404);
