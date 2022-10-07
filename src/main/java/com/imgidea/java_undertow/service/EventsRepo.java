@@ -45,7 +45,7 @@ public class EventsRepo {
                     insertResult = stmt.executeUpdate();
                     logger.info(query);
                     result = "Inserting event row";
-                    logger.debug("Executed query insertResult", insertResult);
+                    logger.debug("Executed query insertResult" + insertResult);
                 } else {
                     query = "SELECT * FROM events WHERE service=? AND event=? AND datetime=?";
                     logger.info(query);
@@ -73,12 +73,11 @@ public class EventsRepo {
                     logger.info(query);
                     result = "Inserting event";
 
-                    logger.info("Executed insertResult", insertResult);
+                    logger.info("Executed insertResult" + insertResult);
                 }
 
             } catch (SQLException e) {
-                logger.info("ERROR inserting event");
-                logger.info(e);
+                logger.info("ERROR inserting event" + e);
                 result = "ERROR inserting";
             }
         } else {
@@ -114,7 +113,7 @@ public class EventsRepo {
                 statement.close();
                 return eventsList;
             } catch (SQLException e) {
-                throw new IllegalStateException("ERROR: SQL Query failed", e);
+                throw new IllegalStateException("ERROR: SQL Query failed" + e);
             }
 
         } else {
@@ -125,8 +124,8 @@ public class EventsRepo {
 
     public List<String> SearchEvents(String datasource_connection, String datasource_password, String datasource_user, String search) {
         logger.info("SearchEvents");
-        logger.info("search: ", search);
-        logger.info("datasource_connection: ", datasource_connection);
+        logger.info("search: " + search);
+        logger.info("datasource_connection: " + datasource_connection);
 
         if (datasource_connection == null) {
             logger.info("Connecting database...");
@@ -155,7 +154,7 @@ public class EventsRepo {
                 stmt.close();
                 return eventsList;
             } catch (SQLException e) {
-                throw new IllegalStateException("ERROR SQL Query failed", e);
+                throw new IllegalStateException("ERROR SQL Query failed" + e);
             }
 
         } else {
