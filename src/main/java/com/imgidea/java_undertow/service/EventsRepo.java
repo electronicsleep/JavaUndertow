@@ -37,7 +37,7 @@ public class EventsRepo {
                 int insertResult;
 
                 if (datetime == null) {
-                    query = "INSERT INTO events (service, event, event_type, datetime) values (?, ?, ?, NOW())";
+                    query = "INSERT INTO events (event_id, service, event, event_type, datetime) values (UUID(), ?, ?, ?, NOW())";
                     stmt = connection.prepareStatement(query);
                     stmt.setString(1, service);
                     stmt.setString(2, event);
@@ -63,7 +63,7 @@ public class EventsRepo {
                         logger.info("Not adding event, event already exists");
                         return "Duplicate Event";
                     }
-                    query = "INSERT INTO events (service, event, event_type, datetime) values (?, ?, ?, ?)";
+                    query = "INSERT INTO events (event_id, service, event, event_type, datetime) values (UUID(), ?, ?, ?, ?)";
                     stmt = connection.prepareStatement(query);
                     stmt.setString(1, service);
                     stmt.setString(2, event);
@@ -102,13 +102,12 @@ public class EventsRepo {
                 ResultSet rs = statement.executeQuery(query);
 
                 while (rs.next()) {
-                    int id = rs.getInt("event_id");
-                    String ids = Integer.toString(id);
+                    String id = rs.getString("event_id");
                     String service = rs.getString("service");
                     String event = rs.getString("event");
                     String event_type = rs.getString("event_type");
                     Date datetime = rs.getTimestamp("datetime");
-                    eventsList.add(ids + " " + service + " " + event + " " + event_type + " " + datetime);
+                    eventsList.add(id + " " + service + " " + event + " " + event_type + " " + datetime);
                 }
                 statement.close();
                 return eventsList;
@@ -143,13 +142,12 @@ public class EventsRepo {
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
-                    int id = rs.getInt("event_id");
-                    String ids=Integer.toString(id);
+                    String id = rs.getString("event_id");
                     String service = rs.getString("service");
                     String event = rs.getString("event");
                     String event_type = rs.getString("event_type");
                     Date datetime = rs.getTimestamp("datetime");
-                    eventsList.add(ids + " " + service + " " + event + " " + event_type + " " + datetime);
+                    eventsList.add(id + " " + service + " " + event + " " + event_type + " " + datetime);
                 }
                 stmt.close();
                 return eventsList;

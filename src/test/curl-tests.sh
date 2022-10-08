@@ -21,4 +21,4 @@ curl --fail -I -X GET http://0.0.0.0:8080/events
 echo "-"
 curl --fail -X GET http://0.0.0.0:8080/page_test
 echo "-"
-echo -e "\ntests pass"
+echo -e "\nTests Pass"
